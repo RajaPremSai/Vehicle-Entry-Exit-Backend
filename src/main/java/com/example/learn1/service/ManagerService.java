@@ -3,8 +3,10 @@ package com.example.learn1.service;
 import com.example.learn1.dto.*;
 import com.example.learn1.model.*;
 import com.example.learn1.repository.*;
+import org.apache.catalina.Store;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -35,6 +37,12 @@ public class ManagerService {
     @Autowired
     private VehicleRepository vehicleRepository;
 
+    @Autowired
+    private ManagerRepository managerRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     // GET /security-guards
     public List<SecurityGuard> getAllSecurityGuards() {
         return securityGuardRepository.findAll();
@@ -56,6 +64,11 @@ public class ManagerService {
         securityGuard.setEmpNumber(securityGuardDTO.getEmpNumber());
         securityGuard.setEmail(securityGuardDTO.getEmail());
         securityGuard.setContactNumber(securityGuardDTO.getContactNumber());
+        securityGuard.setSecurityGuardId(securityGuardDTO.getSecurityGuardId());
+        // Hash the password before saving
+        String hashedPassword = passwordEncoder.encode(securityGuardDTO.getPassword());
+        securityGuard.setPassword(hashedPassword);
+
         return securityGuardRepository.save(securityGuard);
     }
 
@@ -84,6 +97,20 @@ public class ManagerService {
     }
 
     // POST /add-user
+//    public User addUser(UserDTO userDTO) {
+//        User user = new User();
+//        user.setFirstName(userDTO.getFirstName());
+//        user.setMiddleName(userDTO.getMiddleName());
+//        user.setLastName(userDTO.getLastName());
+//        user.setEmpNumber(userDTO.getEmpNumber());
+//        user.setEmail(userDTO.getEmail());
+//        user.setContactNumber(userDTO.getContactNumber());
+//        user.setUserType(userDTO.getUserType());
+//        // IMPORTANT: Hash the password before saving!
+//        // user.setPassword(hashedPassword);
+//        return userRepository.save(user);
+//    }
+
     public User addUser(UserDTO userDTO) {
         User user = new User();
         user.setFirstName(userDTO.getFirstName());
@@ -93,8 +120,11 @@ public class ManagerService {
         user.setEmail(userDTO.getEmail());
         user.setContactNumber(userDTO.getContactNumber());
         user.setUserType(userDTO.getUserType());
-        // IMPORTANT: Hash the password before saving!
-        // user.setPassword(hashedPassword);
+
+        // Hash the password before saving
+        String hashedPassword = passwordEncoder.encode(userDTO.getPassword());
+        user.setPassword(hashedPassword);  // Set the hashed password
+
         return userRepository.save(user);
     }
 
@@ -220,5 +250,22 @@ public class ManagerService {
     // GET /vehicles
     public List<Vehicle> getAllVehicles() {
         return vehicleRepository.findAll();
+    }
+
+        // 1) Register Manager
+    public Manager registerManager(ManagerDTO managerDTO) {
+        Manager manager = new Manager();
+        manager.setFirstName(managerDTO.getFirstName());
+        manager.setMiddleName(managerDTO.getMiddleName());
+        manager.setLastName(managerDTO.getLastName());
+        manager.setEmpNumber(managerDTO.getEmpNumber());
+        manager.setEmail(managerDTO.getEmail());
+        manager.setContactNumber(managerDTO.getContactNumber());
+
+        // Hash the password before saving
+        String hashedPassword = passwordEncoder.encode(managerDTO.getPassword());
+        manager.setPassword(hashedPassword);  // Set the hashed password
+
+        return managerRepository.save(manager);
     }
 }

@@ -1,17 +1,13 @@
 package com.example.learn1.service;
 
 import com.example.learn1.dto.AnnouncementDTO;
+import com.example.learn1.dto.ManagerDTO;
 import com.example.learn1.dto.UserDTO;
-import com.example.learn1.model.Log;
-import com.example.learn1.model.User;
-import com.example.learn1.model.Announcement;
-import com.example.learn1.model.Vehicle;
-import com.example.learn1.repository.AnnouncementRepository;
-import com.example.learn1.repository.LogRepository;
-import com.example.learn1.repository.UserRepository;
-import com.example.learn1.repository.VehicleRepository;
+import com.example.learn1.model.*;
+import com.example.learn1.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -24,6 +20,8 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+
     @Autowired
     private VehicleRepository vehicleRepository;
 
@@ -32,6 +30,9 @@ public class UserService {
 
     @Autowired
     private AnnouncementRepository announcementRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     // 1) Register User
     public User registerUser(UserDTO userDTO) {
@@ -43,8 +44,14 @@ public class UserService {
         user.setEmail(userDTO.getEmail());
         user.setContactNumber(userDTO.getContactNumber());
         user.setUserType(userDTO.getUserType());
+
+        // Hash the password before saving
+        String hashedPassword = passwordEncoder.encode(userDTO.getPassword());
+        user.setPassword(hashedPassword);  // Set the hashed password
+
         return userRepository.save(user);
     }
+
 
     // 5) Get User Logs
     public List<Log> getUserVehicleLogs(String userId) {

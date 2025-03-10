@@ -141,4 +141,12 @@ public class ManagerController {
     public List<Vehicle> getAllVehicles() {
         return managerService.getAllVehicles();
     }
+
+        // 1) POST /manager
+    @PostMapping("/manager")
+    public Manager registerManager(@RequestBody ManagerDTO managerDTO) {
+        return managerService.registerManager(managerDTO);
+    } //Temporary
+
+
 }

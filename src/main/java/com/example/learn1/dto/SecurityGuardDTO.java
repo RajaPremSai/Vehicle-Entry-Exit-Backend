@@ -11,4 +11,5 @@ public class SecurityGuardDTO {
     private String email;
     private String contactNumber;
     private String securityGuardId;
+    private String password;
 }

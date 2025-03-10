@@ -1,5 +1,6 @@
 package com.example.learn1.model;
 
+import com.example.learn1.enums.Role;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,4 +18,5 @@ public class User {
     private String password;
     private String contactNumber;
     private String userType; // Student or Employee
+    private Role role = Role.USER;
 }

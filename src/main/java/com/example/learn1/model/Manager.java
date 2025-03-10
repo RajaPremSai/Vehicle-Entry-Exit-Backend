@@ -5,9 +5,9 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "SecurityGuards")
+@Document(collection = "Managers")
 @Data
-public class SecurityGuard {
+public class Manager {
     @Id
     private String id;
     private String firstName;
@@ -17,7 +17,5 @@ public class SecurityGuard {
     private String email;
     private String password;
     private String contactNumber;
-    private String securityGuardId;
-    private Role role = Role.SECURITY_GUARD;
+    private Role role = Role.MANAGER;
 }
-

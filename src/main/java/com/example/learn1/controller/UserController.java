@@ -1,14 +1,17 @@
 package com.example.learn1.controller;
 
 import com.example.learn1.dto.AnnouncementDTO;
+import com.example.learn1.dto.ManagerDTO;
 import com.example.learn1.dto.UserDTO;
 import com.example.learn1.dto.VehicleDTO;
 import com.example.learn1.model.Log;
+import com.example.learn1.model.Manager;
 import com.example.learn1.model.User;
 import com.example.learn1.model.Vehicle;
 import com.example.learn1.service.UserService;
 import com.example.learn1.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +25,7 @@ public class UserController {
 
     @Autowired
     private VehicleService vehicleService;
+
 
     // 1) POST /register-user
     @PostMapping("/register-user")
