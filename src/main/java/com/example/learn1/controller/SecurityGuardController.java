@@ -6,12 +6,15 @@ import com.example.learn1.dto.AnnouncementDTO;
 import com.example.learn1.dto.LogDTO;
 import com.example.learn1.model.Gate;
 import com.example.learn1.model.Log;
+import com.example.learn1.model.SecurityGuard;
 import com.example.learn1.model.Vehicle;
 import com.example.learn1.service.SecurityGuardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/api/security-guard")
@@ -22,8 +25,10 @@ public class SecurityGuardController {
 
     // 1) GET /gates
     @GetMapping("/gates")
-    public List<Gate> getGates() {
-        return securityGuardService.getGates();
+    public List<String> getGates() {
+        return securityGuardService.getGates().stream()
+                .map(Gate::getGateNumber)
+                .collect(Collectors.toList());
     }
 
     // 2) GET /vehicles/{vehicleNumber}
@@ -49,5 +54,6 @@ public class SecurityGuardController {
     public Log postLog(@RequestBody LogDTO logDTO) {
         return securityGuardService.postLog(logDTO);
     }
+
 
 }

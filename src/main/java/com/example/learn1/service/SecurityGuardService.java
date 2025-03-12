@@ -81,11 +81,13 @@ public class SecurityGuardService {
     // 5) POST /log
     public Log postLog(LogDTO logDTO) {
         Log log = new Log();
+        System.out.println("Received LogDTO: " + logDTO.toString());
         log.setVehicleNumber(logDTO.getVehicleNumber());
         log.setGateNumber(logDTO.getGateNumber());
         log.setSecurityGuardId(logDTO.getSecurityGuardId());
         log.setTimeIn(logDTO.getTimeIn());
         log.setTimeOut(logDTO.getTimeOut());
+        System.out.println("Log Entity: " + log.toString());
         return logRepository.save(log);
     }
 }

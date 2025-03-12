@@ -1,6 +1,7 @@
 package com.example.learn1.service;
 
 import com.example.learn1.dto.VehicleDTO;
+import com.example.learn1.model.SecurityGuard;
 import com.example.learn1.model.Vehicle;
 import com.example.learn1.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,4 +65,16 @@ public class VehicleService {
     public List<Vehicle> getVehiclesByUserId(String userID){
         return vehicleRepository.findByUserID(userID);
     }
+
+    //Get Vehicle data by vehicle number
+    public Vehicle getVehicleByVehicleNo(String vehicleNumber){
+        return vehicleRepository.findByVehicleNumber(vehicleNumber)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Vehicle not found"));
+    }
 }
+
+//// GET /security-guards/{securityGuardId}
+//public SecurityGuard getSecurityGuard(String securityGuardId) {
+//    return securityGuardRepository.findBySecurityGuardId(securityGuardId)
+//            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Security Guard not found"));
+//}
