@@ -10,4 +10,5 @@ public interface SecurityGuardRepository extends MongoRepository<SecurityGuard, 
     void deleteBySecurityGuardId(String securityGuardId);
     Optional<SecurityGuard> findByEmail(String email);
     boolean existsByEmail(String email);
+
 }

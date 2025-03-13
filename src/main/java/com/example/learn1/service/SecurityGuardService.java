@@ -5,21 +5,13 @@ package com.example.learn1.service;
 //import com.example.learn1.dto.BarcodeScanDTO;
 import com.example.learn1.dto.AnnouncementDTO;
 import com.example.learn1.dto.LogDTO;
-import com.example.learn1.model.Announcement;
-import com.example.learn1.model.Gate;
-import com.example.learn1.model.Log;
-import com.example.learn1.model.Vehicle;
-import com.example.learn1.repository.AnnouncementRepository;
-import com.example.learn1.repository.GateRepository;
-import com.example.learn1.repository.LogRepository;
-import com.example.learn1.repository.VehicleRepository;
+import com.example.learn1.model.*;
+import com.example.learn1.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,6 +30,9 @@ public class SecurityGuardService {
 
     @Autowired
     private VehicleRepository vehicleRepository;
+
+    @Autowired
+    private SecurityGuardRepository securityGuardRepository;
 
     // 1) GET /gates
     public List<Gate> getGates() {
@@ -64,6 +59,7 @@ public class SecurityGuardService {
                     dto.setId(announcement.getId());
                     dto.setTitle(announcement.getTitle());
                     dto.setDescription(announcement.getDescription());
+                    dto.setDate(announcement.getDate());
                     return dto;
                 })
                 .collect(Collectors.toList());
@@ -89,5 +85,15 @@ public class SecurityGuardService {
         log.setTimeOut(logDTO.getTimeOut());
         System.out.println("Log Entity: " + log.toString());
         return logRepository.save(log);
+    }
+
+    // 10) GET /logs
+    public List<Log> getLogs() {
+        return logRepository.findAll();
+    }
+
+    //GET by Email id
+    public Optional<SecurityGuard> getSecurityGuardByEmail(String email) {
+        return securityGuardRepository.findByEmail(email);
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -55,5 +56,15 @@ public class SecurityGuardController {
         return securityGuardService.postLog(logDTO);
     }
 
+    // 10) GET /logs
+    @GetMapping("/logs")
+    public List<Log> getLogs() {
+        return securityGuardService.getLogs();
+    }
+
+    @GetMapping("/profile/email/{email}")
+    public Optional<SecurityGuard> getSecurityGuardByEmail(@PathVariable String email) {
+        return securityGuardService.getSecurityGuardByEmail(email);
+    }
 
 }
