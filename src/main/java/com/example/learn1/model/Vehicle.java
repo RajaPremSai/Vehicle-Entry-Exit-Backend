@@ -18,6 +18,6 @@ public class Vehicle {
     private String vehicleOwner;
     private String driverName;
     private String driverMobileNumber;
-    private String userID;
+    private String empNumber;
 
 }

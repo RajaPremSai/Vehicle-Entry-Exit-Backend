@@ -61,7 +61,11 @@ public class AuthController {
             if (passwordEncoder.matches(password, userOpt.get().getPassword())) {
                 System.out.println("User password match successful"); //log password match
                 String token = jwtUtil.generateToken(email, "USER");
-                return ResponseEntity.ok(new LoginResponse("Login Successful", "USER", token));
+                // Get empNumber and email from the User object
+                String empNumber = userOpt.get().getEmpNumber();
+                String userEmail = userOpt.get().getEmail();
+
+                return ResponseEntity.ok(new LoginResponse("Login Successful", "USER", token, userEmail, empNumber));
             } else {
                 System.out.println("User password match failed"); //log password failed match
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
@@ -76,7 +80,10 @@ public class AuthController {
             if (passwordEncoder.matches(password, managerOpt.get().getPassword())) {
                 System.out.println("Manager password match successful"); //log password match
                 String token = jwtUtil.generateToken(email, "MANAGER");
-                return ResponseEntity.ok(new LoginResponse("Login Successful", "MANAGER", token));
+                // Get empNumber and email from the User object
+                String empNumber = managerOpt.get().getEmpNumber();
+                String userEmail = managerOpt.get().getEmail();
+                return ResponseEntity.ok(new LoginResponse("Login Successful", "MANAGER", token,userEmail, empNumber));
             } else {
                 System.out.println("Manager password match failed"); //log password failed match
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
@@ -91,7 +98,10 @@ public class AuthController {
             if (passwordEncoder.matches(password, guardOpt.get().getPassword())) {
                 System.out.println("Security Guard password match successful"); //log password match
                 String token = jwtUtil.generateToken(email, "SECURITY_GUARD");
-                return ResponseEntity.ok(new LoginResponse("Login Successful", "SECURITY_GUARD", token));
+                // Get empNumber and email from the User object
+                String empNumber = guardOpt.get().getEmpNumber();
+                String userEmail = guardOpt.get().getEmail();
+                return ResponseEntity.ok(new LoginResponse("Login Successful", "SECURITY_GUARD", token,userEmail, empNumber));
             } else {
                 System.out.println("Security Guard password match failed"); //log password failed match
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");

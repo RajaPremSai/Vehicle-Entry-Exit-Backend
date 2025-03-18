@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface VehicleRepository extends MongoRepository<Vehicle, String> {
-    List<Vehicle> findByUserID(String userID);
+    List<Vehicle> findByEmpNumber(String empNumber);
     Optional<Vehicle> findByVehicleNumber(String vehicleNumber);
 }

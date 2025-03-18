@@ -4,10 +4,7 @@ import com.example.learn1.dto.AnnouncementDTO;
 import com.example.learn1.dto.ManagerDTO;
 import com.example.learn1.dto.UserDTO;
 import com.example.learn1.dto.VehicleDTO;
-import com.example.learn1.model.Log;
-import com.example.learn1.model.Manager;
-import com.example.learn1.model.User;
-import com.example.learn1.model.Vehicle;
+import com.example.learn1.model.*;
 import com.example.learn1.service.UserService;
 import com.example.learn1.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -51,22 +49,27 @@ public class UserController {
         return vehicleService.editVehicle(vehicleNumber, vehicleDTO);
     }
 
-    // 5) GET /user-logs/:userID
-    @GetMapping("/user-vehicle-logs/{userID}") // Changed endpoint name
-    public List<Log> getUserVehicleLogs(@PathVariable String userID) { // Changed method name
-        return userService.getUserVehicleLogs(userID);
+    // 5) GET /user-logs/:empNumber
+    @GetMapping("/user-vehicle-logs/{empNumber}") // Changed endpoint name
+    public List<Log> getUserVehicleLogs(@PathVariable String empNumber) { // Changed method name
+        return userService.getUserVehicleLogs(empNumber);
     }
 
     // 6) GET /announcements
     @GetMapping("/announcements")
-    public List<AnnouncementDTO> getAllAnnouncements() {
-        return userService.getAnnouncements();
+    public List<AnnouncementDTO> getAllAnnouncements1() {
+        return userService.getAllAnnouncements1();
     }
 
-    // 7) GET /vehicles/{userID}
-    @GetMapping("/vehicles/{userID}")
-    public List<Vehicle> getUserVehicles(@PathVariable String userID) {
-        return vehicleService.getVehiclesByUserId(userID);
+    // 7) GET /vehicles/{empNumber}
+    @GetMapping("/vehicles/{empNumber}")
+    public List<Vehicle> getUserVehicles(@PathVariable String empNumber) {
+        return vehicleService.getVehiclesByEmpNumber(empNumber);
+    }
+
+    @GetMapping("/profile/email/{email}")
+    public Optional<User> getUserByEmail(@PathVariable String email) {
+        return userService.getUserByEmail(email);
     }
 }
 

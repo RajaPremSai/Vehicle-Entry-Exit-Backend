@@ -28,7 +28,7 @@ public class VehicleService {
         vehicle.setVehicleOwner(vehicleDTO.getVehicleOwner());
         vehicle.setDriverName(vehicleDTO.getDriverName());
         vehicle.setDriverMobileNumber(vehicleDTO.getDriverMobileNumber());
-        vehicle.setUserID(vehicleDTO.getUserID());
+        vehicle.setEmpNumber(vehicleDTO.getEmpNumber());
         return vehicleRepository.save(vehicle);
     }
 
@@ -52,7 +52,7 @@ public class VehicleService {
             vehicle.setVehicleImages(vehicleDTO.getVehicleImages());
             vehicle.setVehicleOwner(vehicleDTO.getVehicleOwner());
             vehicle.setDriverName(vehicleDTO.getDriverName());
-            vehicle.setUserID(vehicleDTO.getUserID());
+            vehicle.setEmpNumber(vehicleDTO.getEmpNumber());
             vehicle.setDriverMobileNumber(vehicleDTO.getDriverMobileNumber());
 
             return vehicleRepository.save(vehicle); // Save the updated Vehicle
@@ -62,8 +62,8 @@ public class VehicleService {
     }
 
     // 7) Get Vehicle
-    public List<Vehicle> getVehiclesByUserId(String userID){
-        return vehicleRepository.findByUserID(userID);
+    public List<Vehicle> getVehiclesByEmpNumber(String empNumber){
+        return vehicleRepository.findByEmpNumber(empNumber);
     }
 
     //Get Vehicle data by vehicle number

@@ -1,7 +1,6 @@
 package com.example.learn1.service;
 
 import com.example.learn1.dto.AnnouncementDTO;
-import com.example.learn1.dto.ManagerDTO;
 import com.example.learn1.dto.UserDTO;
 import com.example.learn1.model.*;
 import com.example.learn1.repository.*;
@@ -13,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -54,11 +54,11 @@ public class UserService {
 
 
     // 5) Get User Logs
-    public List<Log> getUserVehicleLogs(String userId) {
-        List<Vehicle> vehicles = vehicleRepository.findByUserID(userId);
+    public List<Log> getUserVehicleLogs(String empNumber) {
+        List<Vehicle> vehicles = vehicleRepository.findByEmpNumber(empNumber);
 
         if (vehicles.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No vehicles found for user ID: " + userId);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No vehicles found for empNumber: " + empNumber);
         }
 
         List<Log> allLogs = new ArrayList<>();
@@ -68,14 +68,14 @@ public class UserService {
         }
 
         if (allLogs.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No logs found for vehicles of user ID: " + userId);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No logs found for vehicles of empNumber: " + empNumber);
         }
 
         return allLogs;
     }
 
     // 6) Get Announcements
-    public List<AnnouncementDTO> getAnnouncements() {
+    public List<AnnouncementDTO> getAllAnnouncements1() {
         List<Announcement> announcements = announcementRepository.findAll();
         return announcements.stream()
                 .map(announcement -> {
@@ -83,8 +83,14 @@ public class UserService {
                     dto.setId(announcement.getId());
                     dto.setTitle(announcement.getTitle());
                     dto.setDescription(announcement.getDescription());
+                    dto.setDate(announcement.getDate());
                     return dto;
                 })
                 .collect(Collectors.toList());
+    }
+
+    //GET by Email id
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }

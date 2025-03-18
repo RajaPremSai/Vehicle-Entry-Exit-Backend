@@ -239,10 +239,10 @@ public class ManagerService {
     }
 
     // GET /user-vehicles/{userID}
-    public List<Vehicle> getUserVehicles(String userID) {
-        List<Vehicle> vehicles = vehicleRepository.findByUserID(userID);
+    public List<Vehicle> getUserVehicles(String empNumber) {
+        List<Vehicle> vehicles = vehicleRepository.findByEmpNumber(empNumber);
         if (vehicles.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No vehicles found for user ID: " + userID);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No vehicles found for empNumber: " + empNumber);
         }
         return vehicles;
     }
