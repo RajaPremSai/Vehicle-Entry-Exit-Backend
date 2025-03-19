@@ -24,3 +24,44 @@ The objective of this project was to develop a robust and secure backend system 
 -   Postman/Insomnia/ThunderClient: For API testing.
 -   Git: For version control.
 -   (Future) MariaDB: For relational database management.
+
+# Features
+
+## User Features
+
+-   **Account Management:**
+    -      Users can create accounts as either an Employee or Student.
+    -      Secure login functionality.
+-   **Vehicle Management:**
+    -      Users can add, edit, and delete their vehicle details.
+    -      A unique QR code is generated based on the vehicle number, which can be downloaded and saved to the user's gallery.
+    -      Users can view a log of all entries and exits associated with their vehicles.
+-   **Information Access:**
+    -      Users can view announcements posted by the manager.
+
+## Security Guard Features
+
+-   **Secure Login:**
+    -      Security guards can securely log in to the system.
+-   **Vehicle Entry/Exit Management:**
+    -      Security guards can scan QR codes to fetch vehicle details.
+    -      They can post entry or exit logs by selecting the appropriate gate and status.
+-   **Log Access:**
+    -      Security guards can view all vehicle logs.
+-   **Information Access:**
+    -      Security guards can access announcements posted by the manager.
+-   **Profile Management:**
+    -   Security guards can view their own profile information.
+
+## Manager Features
+
+-   **Security Guard Management:**
+    -      Managers can add, edit, delete, and view security guard profiles.
+-   **Gate Management:**
+    -      Managers can configure gates by adding, editing, and deleting them.
+-   **Announcement Management:**
+    -      Managers can post and manage announcements.
+-   **University Vehicle Management:**
+    -      Managers can add, edit, delete, and view university vehicles.
+-   **Data Access:**
+    -      Managers can view all registered users and vehicles.
