@@ -65,3 +65,18 @@ The objective of this project was to develop a robust and secure backend system 
     -      Managers can add, edit, delete, and view university vehicles.
 -   **Data Access:**
     -      Managers can view all registered users and vehicles.
+
+# Project Structure
+
+This project follows a layered architecture with clear separation of concerns:
+
+-   **`controller`**: Handles HTTP requests and routes them to the appropriate service.
+-   **`dto`**: Data Transfer Objects for passing data between layers.
+-   **`enums`**: Enumerations for fixed sets of constants like the roles here
+-   **`filter`**: Custom filters for request/response processing (JWT).
+-   **`model`**: Collection classes representing the data model.
+-   **`repository`**: Interfaces for data access and persistence.
+-   **`service`**: Business logic implementation.
+-   **`util`**: Utility classes for common functionality.
+-   **`Learn1Application.java`**: Main Spring Boot application class.
+-   **`SecurityConfig.java`**: Security configuration for authentication and authorization.
