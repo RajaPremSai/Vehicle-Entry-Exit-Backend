@@ -83,6 +83,10 @@ public class ManagerService {
         securityGuard.setEmpNumber(securityGuardDTO.getEmpNumber());
         securityGuard.setEmail(securityGuardDTO.getEmail());
         securityGuard.setContactNumber(securityGuardDTO.getContactNumber());
+        securityGuard.setSecurityGuardId(securityGuardDTO.getSecurityGuardId());
+        // Hash the password before saving
+        String hashedPassword = passwordEncoder.encode(securityGuardDTO.getPassword());
+        securityGuard.setPassword(hashedPassword);
 
         return securityGuardRepository.save(securityGuard);
     }
@@ -221,6 +225,7 @@ public class ManagerService {
         announcement.setId(announcementDTO.getId());
         announcement.setTitle(announcementDTO.getTitle());
         announcement.setDescription(announcementDTO.getDescription());
+        announcement.setDate(announcementDTO.getDate());
         return announcementRepository.save(announcement);
     }
 

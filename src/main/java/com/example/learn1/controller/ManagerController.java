@@ -39,7 +39,7 @@ public class ManagerController {
         return managerService.updateSecurityGuard(securityGuardId, securityGuardDTO);
     }
 
-    // DELETE /security-guards/{securityGuardId}
+    // DELETE /{securityGuardId}
     @DeleteMapping("/{securityGuardId}")
     public void deleteSecurityGuard(@PathVariable String securityGuardId) {
         managerService.deleteSecurityGuard(securityGuardId);
