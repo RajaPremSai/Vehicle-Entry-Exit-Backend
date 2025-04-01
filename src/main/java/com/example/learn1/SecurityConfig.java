@@ -49,7 +49,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/register-user", "/api/auth/login","/api/manager/manager").permitAll() // Open to all //Need to remove permisiion to add manager later
+                        .requestMatchers("/api/register-user", "/api/auth/login","/api/manager/manager","/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui/index.html").permitAll() // Open to all //Need to remove permisiion to add manager later
                         .requestMatchers("/api/security-guard/**").hasRole("SECURITY_GUARD") // Security Guard only
                         .requestMatchers("/api/manager/**").hasRole("MANAGER") // Manager only
                         .requestMatchers("/api/**").hasRole("USER") // User only
